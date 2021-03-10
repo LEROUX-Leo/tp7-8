@@ -135,15 +135,37 @@ switch(chx)
 			break;
 
 	case 8 : //Trier les livres par titre
+		reponse=trierTitre(&B);
+            if (reponse!=0)
+            {
+                printf("Le tri a bien été effectuée!\n");
+                sauvegarde(&B);
+            }
+            else 
+                {printf("Tri impossible!\n");}
+            break;
 
-			break;
 
 	case 9 : //Trier les livres par auteur
-
+					reponse=trierAuteur(&B);
+            if (reponse!=0)
+            {
+                printf("Le tri a bien été effectuée!\n");
+                sauvegarde(&B);
+            }
+            else 
+                {printf("Tri impossible!\n");}
 			break;
 
 	case 10 : //Trier les livres par année
-
+					reponse=trierAnnee(&B);
+            if (reponse!=0)
+            {
+                printf("Le tri a bien été effectuée!\n");
+                sauvegarde(&B);
+            }
+            else 
+                {printf("Tri impossible!\n");}
 			break;
 	
 	}

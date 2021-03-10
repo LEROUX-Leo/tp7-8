@@ -216,3 +216,77 @@ int emprunter(T_Bibliotheque *ptrB)
 }
       
 
+int trierAnnee(T_Bibliotheque *ptrB)
+{
+    int i,j, reponse=0;
+    if (ptrB->nbLivres!=0)
+    {
+        reponse=1;
+        ptrB->nbLivres++;
+        for(i=0;i<=ptrB->nbLivres-2;i++)
+        {
+            for (j=0;j<ptrB->nbLivres-2;j++)
+            {
+                if (ptrB->etagere[j].annee>ptrB->etagere[j+1].annee)
+                {
+                    ptrB->etagere[ptrB->nbLivres]=ptrB->etagere[j+1];
+                    ptrB->etagere[j+1]=ptrB->etagere[j];
+                    ptrB->etagere[j]=ptrB->etagere[ptrB->nbLivres];
+                }
+            }
+        }
+        ptrB->nbLivres--;
+    }
+    else {reponse=0;}
+    return reponse;
+}
+
+int trierTitre(T_Bibliotheque *ptrB)
+{
+    int i,j, reponse=0;
+    if (ptrB->nbLivres!=0)
+    {
+        reponse=1;
+        ptrB->nbLivres++;
+        for(i=0;i<=ptrB->nbLivres-2;i++)
+        {
+            for (j=0;j<ptrB->nbLivres-2;j++)
+            {
+                if (strcmp(ptrB->etagere[j].titre,ptrB->etagere[j+1].titre)>0)
+                {
+                    ptrB->etagere[ptrB->nbLivres]=ptrB->etagere[j+1];
+                    ptrB->etagere[j+1]=ptrB->etagere[j];
+                    ptrB->etagere[j]=ptrB->etagere[ptrB->nbLivres];
+                }
+            }
+        }
+        ptrB->nbLivres--;
+    }
+    else {reponse=0;}
+    return reponse;
+}
+
+int trierAuteur(T_Bibliotheque *ptrB)
+{
+    int i,j, reponse=0;
+    if (ptrB->nbLivres!=0)
+    {
+        reponse=1;
+        ptrB->nbLivres++;
+        for(i=0;i<=ptrB->nbLivres-2;i++)
+        {
+            for (j=0;j<ptrB->nbLivres-2;j++)
+            {
+                if (strcmp(ptrB->etagere[j].auteur,ptrB->etagere[j+1].auteur)>0)
+                {
+                    ptrB->etagere[ptrB->nbLivres]=ptrB->etagere[j+1];
+                    ptrB->etagere[j+1]=ptrB->etagere[j];
+                    ptrB->etagere[j]=ptrB->etagere[ptrB->nbLivres];
+                }
+            }
+        }
+        ptrB->nbLivres--;
+    }
+    else {reponse=0;}
+    return reponse;
+}
