@@ -15,8 +15,6 @@ if (ptrB->nbLivres<CAPACITE_BIBLIO)// reste t il de la place?
 	ptrB->nbLivres++;
 	return 1;
 	}
-
-
 return 0;
 	
 }
@@ -31,11 +29,8 @@ if(ptrB->nbLivres==0)
 		{
 		for(i=0;i<ptrB->nbLivres;i++)
 			{
-			afficherLivre( &(ptrB->etagere[i])  );
-			
+			afficherLivre(&(ptrB->etagere[i]));
 			}
-
-
 		return 1;
 		}
 }
@@ -169,9 +164,9 @@ int RendreLivre(T_Bibliotheque  *ptrB)
     {
         if ((strcmp(ptrB->etagere[i].titre,titre)==0) && (strcmp(ptrB->etagere[i].auteur,AUTEUR)==0))
         {
-            if (strcmp(ptrB->etagere[i].emprunteur,T)==0)
+            if (strcmp(ptrB->etagere[i].emprunteur.nomemprunteur,T)==0)
             {
-            strcpy(ptrB->etagere[i].emprunteur,T);
+            strcpy(ptrB->etagere[i].emprunteur.nomemprunteur,T);
             return 1;
             }
         }
@@ -185,7 +180,7 @@ int emprunter(T_Bibliotheque *ptrB)
     char AUTEUR[K_MaxAut],titre[MAX_TITRE];
     int reponse=0;
     char EMPRUNTEUR[MAX];
-
+    int aux;
     printf("Saisir le titre : ");
     lire(titre,MAX_TITRE);
 
@@ -196,12 +191,25 @@ int emprunter(T_Bibliotheque *ptrB)
     {
         if ((strcmp(ptrB->etagere[i].titre,titre)==0) && (strcmp(ptrB->etagere[i].auteur,AUTEUR)==0))
         {
-            if (*ptrB->etagere[i].emprunteur=='\0')
+            if (*ptrB->etagere[i].emprunteur.nomemprunteur=='\0')
             {
                 printf("Entrez le nom de l'emprunteur");
                 lireChaine("", EMPRUNTEUR, MAX);
-                strcpy(ptrB->etagere[i].emprunteur,EMPRUNTEUR);
- 
+                strcpy(ptrB->etagere[i].emprunteur.nomemprunteur,EMPRUNTEUR);
+                printf("Quel est le jour de cet emprunt (0=lundi,1,2,3,4,5,6) : ");
+                scanf("%d",&aux);
+                ptrB->etagere[i].emprunteur.lejour=aux;
+            
+                printf("Quel est la date de cet emprunt (0,1,...,30): ");
+                scanf("%d",&(ptrB->etagere[i].emprunteur.ledate));
+            
+                printf("Quel est le mois de cet emprunt : (0=janvier,1...,11) : ");
+                scanf("%d",&aux);
+                ptrB->etagere[i].emprunteur.lemois=aux;
+
+                printf("Quel est l'annee de cet emprunt : (0-2021)");
+                scanf("%d",&(ptrB->etagere[i].emprunteur.lannee));
+
                 reponse=1;
             }
 
@@ -213,8 +221,7 @@ int emprunter(T_Bibliotheque *ptrB)
         }
     }  
     return reponse;  
-}
-      
+} 
 
 int trierAnnee(T_Bibliotheque *ptrB)
 {
@@ -289,4 +296,21 @@ int trierAuteur(T_Bibliotheque *ptrB)
     }
     else {reponse=0;}
     return reponse;
+}
+
+int listerlivredispo(const T_Bibliotheque  *ptrB)
+{
+int i;
+if(ptrB->nbLivres==0)
+	return 0;
+	else
+		{
+		for(i=0;i<ptrB->nbLivres;i++)
+			{
+                if (*ptrB->etagere[i].emprunteur.nomemprunteur=='\0'){
+                    afficherLivre(&(ptrB->etagere[i]));
+                }
+			}
+		return 1;
+		}
 }

@@ -19,17 +19,17 @@ printf("\n  5 - Supprimer un livre de la bibliotheque");
 // au programme du TP7 :
 // ajouter le champ emprunteur à votre structure T_Livre
 
-printf("\n  6 - emprunter un livre de la bibliotheque");
-printf("\n  7 - restituer/rendre un livre de la bibliotheque");
-printf("\n  8 - trier les livres (par titre)");
-printf("\n  9 - trier les livres (par auteur)");
-printf("\n 10 - trier les livres (par annee)");
+printf("\n  6 - Emprunter un livre de la bibliotheque");
+printf("\n  7 - Restituer/rendre un livre de la bibliotheque");
+printf("\n  8 - Trier les livres (par titre)");
+printf("\n  9 - Trier les livres (par auteur)");
+printf("\n 10 - Trier les livres (par annee)");
 
 
 // si les 5 choix (6-10) sont bien codés, changez le type T_Emp et remplacez-le par la structure T_Emp visible dans livre.h
-// vous pourrez alors faire les menus 11,12,etc...
-// printf("\n 11 - lister les livres disponibles "); 
-// printf("\n 12 - lister les emprunts en retard "); //on suppose qu'un emprunt dure 7 jours.
+// vous pourrez alors faire les menus 11,12,etc... 
+printf("\n 11 - lister les livres disponibles "); 
+printf("\n 12 - lister les emprunts en retard "); //on suppose qu'un emprunt dure 7 jours.
 // printf("\n 13 - ... imaginez vous même vos propres fonctionnalités ")
 
 printf("\n  0 - QUITTER");
@@ -83,7 +83,6 @@ switch(chx)
 	case 3 : //rechercher un livre par son titre
 
 			RechercherLivre(&B);
-
             break;
 	
 
@@ -118,13 +117,12 @@ switch(chx)
                     printf("L'emprunt a été effectué\n");
                     sauvegarde(&B);
                 }
-            else 
-                {printf("lL'emprunt a échoué\n");}
+
 			break;
 		
 
 	case 7: //Restituer/rendre un livre de la bibliothèque
-			reponse=SuppLivre(&B);
+			reponse=RendreLivre(&B);
             if (reponse==1)
                 {
                     printf("Livre bien rendu\n");
@@ -135,7 +133,7 @@ switch(chx)
 			break;
 
 	case 8 : //Trier les livres par titre
-		reponse=trierTitre(&B);
+				reponse=trierTitre(&B);
             if (reponse!=0)
             {
                 printf("Le tri a bien été effectuée!\n");
@@ -147,7 +145,7 @@ switch(chx)
 
 
 	case 9 : //Trier les livres par auteur
-					reponse=trierAuteur(&B);
+				reponse=trierAuteur(&B);
             if (reponse!=0)
             {
                 printf("Le tri a bien été effectuée!\n");
@@ -158,7 +156,7 @@ switch(chx)
 			break;
 
 	case 10 : //Trier les livres par année
-					reponse=trierAnnee(&B);
+				reponse=trierAnnee(&B);
             if (reponse!=0)
             {
                 printf("Le tri a bien été effectuée!\n");
@@ -167,12 +165,26 @@ switch(chx)
             else 
                 {printf("Tri impossible!\n");}
 			break;
+
+	case 11 : //Lister livres libres
+				reponse=listerlivredispo(&B);
+			if (reponse!=0)
+			{
+				printf("Livres libres : %d\n",reponse);
+				sauvegarde(&B);
+			}
+			else 
+				{printf("Livre non disponible!\n");}
+			break;
 	
+	case 12 : //Lister les emprunts en retards
+
+			break;
 	}
+
 
 }while(chx!=0);
 
 
 return 0;
-
 }

@@ -32,6 +32,6 @@ int emprunter(T_Bibliotheque *ptrB);
 int trierAnnee(T_Bibliotheque *ptrB);
 int trierTitre(T_Bibliotheque *ptrB);
 int trierAuteur(T_Bibliotheque *ptrB);
-
+int listerlivredispo(const T_Bibliotheque  *ptrB);
 
 #endif
